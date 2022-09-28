@@ -1,0 +1,268 @@
+/* **** * Off Canvas MODEL ***** */
+
+:root {
+  /* Primary  */
+  --magenta-050: #f5e1f7;
+  --magenta-100: #ecbdf2;
+  --magenta-200: #ce80d9;
+  --magenta-300: #bb61c7;
+  --magenta-400: #ad4bb8;
+  --magenta-500: #a23dad;
+  --magenta-600: #90279c;
+  --magenta-700: #7c1a87;
+  --magenta-800: #671270;
+  --magenta-900: #4e0754;
+
+  /* Neutrals  */
+  --blue-grey-050: #f0f4f8;
+  --blue-grey-100: #d9e2ec;
+  --blue-grey-200: #bcccdc;
+  --blue-grey-300: #9fb3c8;
+  --blue-grey-400: #829ab1;
+  --blue-grey-500: #627d98;
+  --blue-grey-600: #486581;
+  --blue-grey-700: #334e68;
+  --blue-grey-800: #243b53;
+  --blue-grey-900: #102a43;
+}
+
+html {
+  font-size: 125%;
+  font-family: "Roboto", sans-serif;
+  line-height: 1.4;
+}
+
+body {
+  background-color: var(--blue-grey-100);
+  color: var(--blue-grey-900);
+}
+
+h2 {
+  font-weight: 400;
+}
+
+.button {
+  padding: 0.75em 0.75em;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--magenta-300);
+  color: #fff;
+  transition: background-color 0.3s ease-out;
+}
+
+.button:hover,
+.button:active {
+  background-color: var(--magenta-600);
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.wrap {
+  position: relative;
+  max-width: 30em;
+}
+
+/* * START EDITING HERE
+ * ================== */
+
+.point-hand {
+  position: absolute;
+  left: 0;
+  right: 0;
+  max-width: 3em;
+  margin-top: 1em;
+  margin-right: auto;
+  margin-left: auto;
+  color: var(--magenta-300);
+}
+
+/* Modal *  */
+.modal-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease-out,
+    /* This is what is happening:
+
+  When opening:
+  z-index changes first (this is correct)
+  opacity changes over 3 seconds
+  When closing:
+  z-index changes first (this is wrong)
+  opacity changes over 3 seconds
+  This is what we want:
+  
+  When opening:
+  z-index changes first
+  opacity changes over 3 seconds
+  When closing:
+  opacity changes over 3 seconds
+  z-index changes after 3 seconds
+  Here’s how we can delay the z-index transition by 3 seconds: */
+      z-index 0s 0.3s linear;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.modal-is-open .modal-overlay {
+  opacity: 1;
+  z-index: 1;
+  /* When we open the modal, we do not want to delay the z-index transition. */
+  transition-delay: 0s;
+}
+
+.modal {
+  display: grid;
+  place-items: center;
+  position: relative;
+  border-radius: 4px;
+  background-color: var(--magenta-300);
+  box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.15);
+  color: #fff;
+  min-width: 50vmin;
+  min-height: 50vmin;
+}
+
+.modal__close-button {
+  position: absolute;
+  top: -1.5em;
+  right: -1.5em;
+  padding: 1em 1em;
+  font-size: 0.6em;
+  border-radius: 50%;
+  border: 2px solid var(--blue-grey-400);
+  background: var(--blue-grey-400);
+  color: white;
+  opacity: 0;
+}
+
+.modal:hover .modal__close-button {
+  opacity: 1;
+}
+
+.modal__close-button:hover,
+.modal__close-button:active,
+.modal__close-button:focus {
+  opacity: 1;
+  background: var(--magenta-300);
+  border-color: var(--magenta-600);
+}
+
+@keyframes point {
+  0% {
+    /* transform: scale(0.25); */
+    transform: translateY(3em);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    /* transform: scale(1); */
+    opacity: 1;
+  }
+}
+
+.point-hand {
+  animation: point 1s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+/* We used GSAP animation and commented animation using css */
+
+/* @keyframes zoom {
+  0% {
+    transform: scale(0.25);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+} */
+/* @keyframes wave {
+  0% {
+    transform: rotate(0);
+  }
+  20% {
+    transform: rotate(15deg);
+  }
+  40% {
+    transform: rotate(-15deg);
+  }
+  60% {
+    transform: rotate(15deg);
+  }
+  80% {
+    transform: rotate(-15deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+} */
+
+.wave-hand {
+  /* We used GSAP animation and commented animation using css */
+
+  /* animation: zoom 1s cubic-bezier(0.18, 0.89, 0.32, 1.28); */
+  /* animation: zoom 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28), wave 1s 0.55s ease-in-out;
+  transform-origin: bottom center; */
+}
+
+/* --------------------------------------------- */
+
+/********
+Exercise:Create a button. Do the following when the button is clicked: *******/
+
+/* #btn1 {
+  display: block;
+  padding: 2.4rem 3.2rem;
+  color: white;
+  background-color: black;
+  border: 5px solid #555;
+  border-radius: 9px;
+  font-size: 3rem;
+  margin: 10rem auto;
+} */
+
+/* ---------------------------------------------------------------*/
+
+/******** Getting CSS with JavaScript*******/
+
+/* .div-1 {
+  display: block;
+  border: 3px solid olive;
+  line-height: 2rem;
+} */
+
+/* --------------------------------------------------------------- --*/
+
+/******** Getting CSS with JavaScript*******/
+
+/* .div-a {
+  display: block;
+  width: 60rem;
+  padding: 2.4rem 3.2rem;
+  color: white;
+  background-color: black;
+  border: 5px solid #555;
+  border-radius: 9px;
+  font-size: 3rem;
+  margin: 10rem auto;
+} */
+
+/* --------------------------------------------------------------- --*/
+
+/******** DOM Traversals *******/
