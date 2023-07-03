@@ -1,2 +1,2 @@
 # CSS Modal Component
-### Live Link: https://ubiquitous-cannoli-e1d5f8.netlify.app/
+### Live Link: https://silly-druid-ec1ac6.netlify.app/
